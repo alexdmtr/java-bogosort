@@ -1,14 +1,20 @@
 import java.util.List;
+import java.util.Iterator;
 import java.util.Random;
 
 public class BogoSort {
   private static <T extends Comparable<? super T>> boolean isSorted(List<T> list) {
-    for (int index = 0; index < list.size()-1; index++) {
-      T current = list.get(index);
-      T next = list.get(index+1);
+    Iterator<T> iter = list.iterator();
+    if(!iter.hasNext()) return true;
 
-      if (! (current.compareTo(next) <= 0))
+    T curr = iter.next();
+    while(iter.hasNext()) {
+      T next = iter.next();
+
+      if (curr.compareTo(next) > 0)
         return false;
+
+      curr = next;
     }
 
     return true;
